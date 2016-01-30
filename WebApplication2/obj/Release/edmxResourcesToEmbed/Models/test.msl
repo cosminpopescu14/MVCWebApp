@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="testModelStoreContainer" CdmEntityContainer="testEntities">
+    <EntitySetMapping Name="tests">
+      <EntityTypeMapping TypeName="testModel.test">
+        <MappingFragment StoreEntitySet="test">
+          <ScalarProperty Name="medie" ColumnName="medie" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nume" ColumnName="nume" />
+          <ScalarProperty Name="DataNastere" ColumnName="DataNastere" />
+          <ScalarProperty Name="facultate" ColumnName="facultate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="testModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserFullName" ColumnName="UserFullName" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DatePersonales">
+      <EntityTypeMapping TypeName="testModel.DatePersonale">
+        <MappingFragment StoreEntitySet="DatePersonale">
+          <ScalarProperty Name="Liceu" ColumnName="Liceu" />
+          <ScalarProperty Name="Oras" ColumnName="Oras" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

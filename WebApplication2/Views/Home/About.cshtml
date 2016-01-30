@@ -1,0 +1,24 @@
+﻿<link rel="stylesheet" type="text/css" href="~/Content/AppStyle.css" />
+
+@{
+    ViewBag.Title = "About";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+
+
+<div id="a">
+<p>  Este o aplicatie web pe care eu voi testa anumite functionalitati ce vor aparea in aplicatia de licenta<br /> Pana acum am logare cu Facebook si una facuta de mine<br /> plus conectarea la o baza de date precum si operatiile CRUD :)<br>
+</div>
+
+<div>
+
+    <ul>
+        @foreach (var item in ViewBag.VectorSortat) //iteram prin elementele din view bag
+        {
+            <li>  @item  </li>
+        }
+        
+    </ul>
+</div>

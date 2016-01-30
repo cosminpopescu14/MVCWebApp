@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="testModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DatePersonale">
+          <Key>
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="StudentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id" Type="int" />
+          <Property Name="Oras" Type="varchar" MaxLength="30" />
+          <Property Name="Liceu" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="test">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="nume" Type="varchar" MaxLength="30" />
+          <Property Name="DataNastere" Type="datetime" />
+          <Property Name="facultate" Type="varchar(max)" />
+          <Property Name="medie" Type="float" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserFullName" Type="varchar" MaxLength="100" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar(max)" />
+        </EntityType>
+        <Association Name="FK__DatePersonal__id__49C3F6B7">
+          <End Role="test" Type="Self.test" Multiplicity="0..1" />
+          <End Role="DatePersonale" Type="Self.DatePersonale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="test">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DatePersonale">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="testModelStoreContainer">
+          <EntitySet Name="DatePersonale" EntityType="Self.DatePersonale" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="test" EntityType="Self.test" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__DatePersonal__id__49C3F6B7" Association="Self.FK__DatePersonal__id__49C3F6B7">
+            <End Role="test" EntitySet="test" />
+            <End Role="DatePersonale" EntitySet="DatePersonale" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="testModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="test">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nume" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DataNastere" Type="DateTime" Precision="3" />
+          <Property Name="facultate" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="medie" Type="Double" />
+          <NavigationProperty Name="DatePersonales" Relationship="testModel.FK__DatePersonal__id__49C3F6B7" FromRole="test" ToRole="DatePersonale" />
+        </EntityType>
+        <EntityContainer Name="testEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tests" EntityType="Self.test" />
+          <EntitySet Name="Users" EntityType="testModel.User" />
+          <EntitySet Name="DatePersonales" EntityType="testModel.DatePersonale" />
+          <AssociationSet Name="FK__DatePersonal__id__49C3F6B7" Association="testModel.FK__DatePersonal__id__49C3F6B7">
+            <End Role="test" EntitySet="tests" />
+            <End Role="DatePersonale" EntitySet="DatePersonales" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="UserFullName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DatePersonale">
+          <Key>
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="StudentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="Int32" />
+          <Property Name="Oras" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Liceu" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="test" Relationship="testModel.FK__DatePersonal__id__49C3F6B7" FromRole="DatePersonale" ToRole="test" />
+        </EntityType>
+        <Association Name="FK__DatePersonal__id__49C3F6B7">
+          <End Type="testModel.test" Role="test" Multiplicity="0..1" />
+          <End Type="testModel.DatePersonale" Role="DatePersonale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="test">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DatePersonale">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="testModelStoreContainer" CdmEntityContainer="testEntities">
+          <EntitySetMapping Name="tests">
+            <EntityTypeMapping TypeName="testModel.test">
+              <MappingFragment StoreEntitySet="test">
+                <ScalarProperty Name="medie" ColumnName="medie" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nume" ColumnName="nume" />
+                <ScalarProperty Name="DataNastere" ColumnName="DataNastere" />
+                <ScalarProperty Name="facultate" ColumnName="facultate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="testModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserFullName" ColumnName="UserFullName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DatePersonales">
+            <EntityTypeMapping TypeName="testModel.DatePersonale">
+              <MappingFragment StoreEntitySet="DatePersonale">
+                <ScalarProperty Name="Liceu" ColumnName="Liceu" />
+                <ScalarProperty Name="Oras" ColumnName="Oras" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

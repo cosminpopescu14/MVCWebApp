@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Chat";
+}
+
+<h2>Chat - talk to somebody !</h2>
+
+<div class="container">
+    <input type="text" id="message"/>
+    <input type="button" id="send" value="Send"/>
+    <input type="hidden" id="displayname" />
+    <ul id="discussion"></ul>
+</div>
+
+@section scripts
+{
+    <script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
+    <script src="@Url.Content("~/signalr/hubs")"></script><!--acest folder se creeaza la compilarea aplicatiei-->
+
+    <script>
+        $(function () {
+
+            var chat = $.connection.chat;//atentie aici - $.connection.nume_fisier_din_folderul_Hubs(aici fisierul din folderul Hubs se cheama Chat.cs); 
+            chat.client.addNewMessageToPage = function (name, message) {
+
+                $('#discussion').append('<li><strong>' + htmlEncode(name)
+                    + '</strong>: ' + htmlEncode(message) + '</li>');
+            };
+
+            $('#displayname').val(prompt('What is your name: ', ''));
+
+            $('#message').focus();
+
+            $.connection.hub.start().done(function () {//pornesc conexiunea
+
+                $('#send').click(function () {//trimit la server mesajul
+
+                    chat.server.send($('#displayname').val(), $('#message').val());
+                    $('#message').val('').focus();
+                });
+            });
+        });
+
+        function htmlEncode(value) {//cast in format human readable
+            return encodedValue = $('<div />').text(value).html();
+        }
+    </script>
+}

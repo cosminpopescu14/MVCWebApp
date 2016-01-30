@@ -1,0 +1,42 @@
+﻿@model WebApplication2.Models.test
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>test</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nume)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nume)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataNastere)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataNastere)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.facultate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.facultate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
