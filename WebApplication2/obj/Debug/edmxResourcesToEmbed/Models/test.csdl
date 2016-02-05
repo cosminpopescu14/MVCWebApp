@@ -9,10 +9,16 @@
     <Property Name="DataNastere" Type="DateTime" Precision="3" />
     <Property Name="facultate" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="medie" Type="Double" />
+    <NavigationProperty Name="DatePersonales" Relationship="testModel.FK__DatePersonal__id__49C3F6B7" FromRole="test" ToRole="DatePersonale" />
   </EntityType>
   <EntityContainer Name="testEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="tests" EntityType="Self.test" />
     <EntitySet Name="Users" EntityType="testModel.User" />
+    <EntitySet Name="DatePersonales" EntityType="testModel.DatePersonale" />
+    <AssociationSet Name="FK__DatePersonal__id__49C3F6B7" Association="testModel.FK__DatePersonal__id__49C3F6B7">
+      <End Role="test" EntitySet="tests" />
+      <End Role="DatePersonale" EntitySet="DatePersonales" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="User">
     <Key>
@@ -23,4 +29,26 @@
     <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
   </EntityType>
+  <EntityType Name="DatePersonale">
+    <Key>
+      <PropertyRef Name="StudentId" />
+    </Key>
+    <Property Name="StudentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id" Type="Int32" />
+    <Property Name="Oras" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Liceu" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="test" Relationship="testModel.FK__DatePersonal__id__49C3F6B7" FromRole="DatePersonale" ToRole="test" />
+  </EntityType>
+  <Association Name="FK__DatePersonal__id__49C3F6B7">
+    <End Type="testModel.test" Role="test" Multiplicity="0..1" />
+    <End Type="testModel.DatePersonale" Role="DatePersonale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="test">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DatePersonale">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

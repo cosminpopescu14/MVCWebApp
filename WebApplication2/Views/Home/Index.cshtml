@@ -15,12 +15,37 @@
             ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
             enables a clean separation of concerns and gives you full control over markup
             for enjoyable, agile development.<br>
-            
+
             Acesta este un test pt a vedea daca kendo functioneaza
-          
+            @(Html.Kendo().Editor()
+                 .Name("editor")
+                 .HtmlAttributes(new { style = "height:440px" })
+                 .Resizable(resizable => resizable.Content(true).Toolbar(true))
+                 .ImageBrowser(imageBrowser => imageBrowser
+                 .Image("~/Content/UserFiles/Images/{0}")
+                 .Read("Read", "ImageBrowser")
+                 .Create("Create", "ImageBrowser")
+                 .Destroy("Destroy", "ImageBrowser")
+                 .Upload("Upload", "ImageBrowser")
+                 .Thumbnail("Thumbnail", "ImageBrowser")
+                 )
+     
+            )
            
+            <button type="button" class="btn btn-default" onclick="Send()">Write in file</button>
         </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+
+    </div>
+
+    <div>
+
+        <ul>
+            @foreach (var item in ViewBag.QuickSort) //iteram prin elementele din view bag. a se observa ca item este de tip dynamic
+            {
+                <li>  @item  </li>
+            }
+
+        </ul>
     </div>
     <div class="col-md-4">
         <h2>Get more libraries</h2>
@@ -33,3 +58,20 @@
         <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
 </div>
+
+<script>
+    function Send() {
+        
+        var Data = {
+            content: $("#editor").val()//getting the data from editor
+        }
+        
+        $.ajax({
+            contentType: "application/json; charset=utf-8",
+            url: "/Home/WriteInFileFromKendoEditor",//controller and action from it
+            type: "POST",
+            data: JSON.stringify(Data)
+            
+        });
+    }
+</script>

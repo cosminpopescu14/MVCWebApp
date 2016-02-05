@@ -18,6 +18,7 @@ namespace WebApplication2.Controllers
 
         // GET: tests
        [RequireHttps]
+       [ValidateInput(true)]
         public ActionResult Index(string searchString)
         {
             var students = from s in db.tests
