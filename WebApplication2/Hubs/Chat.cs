@@ -8,9 +8,6 @@ namespace WebApplication2.Hubs
 {
     public class Chat : Hub
     {
-        public void Send(string name, string message)
-        {
-            Clients.All.addNewMessageToPage(name, message);
-        }
+        public void Send(string name, string message) => Clients.All.addNewMessageToPage(name, message); //o rescriere a metodei
     }
 }

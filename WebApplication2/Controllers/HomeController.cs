@@ -24,7 +24,6 @@ namespace WebApplication2.Controllers
             for (int i = 0; i < array.Length; i++)
                 ViewBag.QuickSort = array;
 
-
             return View();
         }
 
@@ -50,7 +49,6 @@ namespace WebApplication2.Controllers
             for (int i = 0; i < arrayLength; i++)
                   ViewBag.VectorSortat = array; 
             
-           
            return View();
         }
 
@@ -90,13 +88,13 @@ namespace WebApplication2.Controllers
         }
 
         [HttpPost]
-        public  void WriteInFileFromKendoEditor(Content c)
+        public async Task<ActionResult> WriteInFileFromKendoEditor(Content c)//we are writing asynchroniously 
         {
             if (ModelState.IsValid)
             {
                 using (StreamWriter streamWriter = new StreamWriter(@"C:\Users\Cosmin\Desktop\FacultateAn4\test.txt", true))// apped to current file the new content
                 {
-                   streamWriter.WriteLine(c.content, "\n");
+                   await streamWriter.WriteLineAsync(c.content);
                    streamWriter.Close();
                    streamWriter.Dispose();
                 }
@@ -105,7 +103,7 @@ namespace WebApplication2.Controllers
             {
                 ;//throw a message error to user
             }
-            
+            return View();
         }
 
         public ActionResult Sent()
@@ -119,3 +117,4 @@ namespace WebApplication2.Controllers
         }
     }
 }
+

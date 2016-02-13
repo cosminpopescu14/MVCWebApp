@@ -28,7 +28,7 @@ namespace WebApplication2.Controllers
                 }
 
                 {
-                    ModelState.AddModelError("", "incorect creddetials... tyr again !!");
+                    ModelState.AddModelError("", "incorect credetials... try again !!");
                 }
             }
             return View();
